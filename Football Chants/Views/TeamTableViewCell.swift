@@ -7,18 +7,24 @@
 
 import UIKit
 
+protocol TeamTableViewCellDelegate: AnyObject {
+    func didTapPlayback(for team: Team)
+}
+
 class TeamTableViewCell: UITableViewCell {
 
     static let cellId = "TeamTableViewCell"
     
     // MARK: - UI
     
+    // Container View
     private lazy var containerView: UIView = {
-        let vw = UIView()
-        vw.translatesAutoresizingMaskIntoConstraints = false
-        return vw
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
+    // Stack View
     private lazy var contentStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -27,6 +33,7 @@ class TeamTableViewCell: UITableViewCell {
         return stackView
     }()
     
+    // Badge Image
     private lazy var badgeImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -34,6 +41,7 @@ class TeamTableViewCell: UITableViewCell {
         return imageView
     }()
     
+    // Play Button
     private lazy var playbackButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -41,6 +49,7 @@ class TeamTableViewCell: UITableViewCell {
         return btn
     }()
     
+    // Team name label
     private lazy var nameLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -50,6 +59,7 @@ class TeamTableViewCell: UITableViewCell {
         return label
     }()
     
+    // Founded date label
     private lazy var foundedLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -59,6 +69,7 @@ class TeamTableViewCell: UITableViewCell {
         return label
     }()
     
+    // Job type label
     private lazy var jobLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -68,6 +79,7 @@ class TeamTableViewCell: UITableViewCell {
         return label
     }()
     
+    // Full information label
     private lazy var infoLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -77,23 +89,40 @@ class TeamTableViewCell: UITableViewCell {
         return label
     }()
     
+    private weak var delegate: TeamTableViewCellDelegate?
+    private var team: Team?
+    
     // MARK: - Lifecycle
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         containerView.layer.cornerRadius = 10
     }
     
-    func configure() {
-
-        containerView.backgroundColor = TeamType.arsenal.background
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.team = nil
+        self.delegate = nil
+        self.contentView.subviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    func configure(with item: Team, delegate: TeamTableViewCellDelegate) {
         
-        badgeImageView.image = TeamType.arsenal.badge
-        playbackButton.setImage(UIImage(systemName: "play.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32)), for: .normal)
+        self.team = item
+        self.delegate = delegate
         
-        nameLabel.text = "Arsenal"
-        foundedLabel.text = "1000"
-        jobLabel.text = "Current Manager: Mikel Arteta"
-        infoLabel.text = "Lorem Ipsur is simply text of the printing and typesetting industry. Lorem Ipsur has been the industry's standard dummy text ever since the 1500s."
+        playbackButton.addTarget(self, action: #selector(didTapPlayback), for: .touchUpInside)
+        
+        containerView.backgroundColor = item.id.background
+        
+        badgeImageView.image = item.id.badge
+        
+        playbackButton.setImage(item.isPlaying ? Assets.pause : Assets.play, for: .normal)
+        
+        nameLabel.text = item.name
+        foundedLabel.text = item.founded
+        jobLabel.text = "Current \(item.manager.job.rawValue): \(item.manager.name)"
+        infoLabel.text = item.info
         
         self.contentView.addSubview(containerView)
         
@@ -133,5 +162,10 @@ class TeamTableViewCell: UITableViewCell {
             
         ])
     }
-
+    
+    @objc func didTapPlayback() {
+        if let team = team {
+            delegate?.didTapPlayback(for: team)
+        }
+    }
 }
