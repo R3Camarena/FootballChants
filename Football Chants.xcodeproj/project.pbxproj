@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CF5624C62A0D988800CBD395 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5624C52A0D988800CBD395 /* Assets.swift */; };
+		CF5624C82A0DB5D000CBD395 /* AudioManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5624C72A0DB5D000CBD395 /* AudioManagerViewModel.swift */; };
 		CF8C85862A0CA3C0006E9FF9 /* TeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8C85852A0CA3C0006E9FF9 /* TeamTableViewCell.swift */; };
 		CFFBD9C52A0C74A700CE76BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFBD9C42A0C74A700CE76BC /* AppDelegate.swift */; };
 		CFFBD9C72A0C74A700CE76BC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFBD9C62A0C74A700CE76BC /* SceneDelegate.swift */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		CF5624C52A0D988800CBD395 /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		CF5624C72A0DB5D000CBD395 /* AudioManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManagerViewModel.swift; sourceTree = "<group>"; };
 		CF8C85852A0CA3C0006E9FF9 /* TeamTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTableViewCell.swift; sourceTree = "<group>"; };
 		CFFBD9C12A0C74A700CE76BC /* Football Chants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Football Chants.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFFBD9C42A0C74A700CE76BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				CFFBDA0D2A0C9F2300CE76BC /* TeamsViewModel.swift */,
+				CF5624C72A0DB5D000CBD395 /* AudioManagerViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				CFFBDA0B2A0C9A3300CE76BC /* Manager.swift in Sources */,
 				CFFBDA012A0C78D200CE76BC /* Teams.swift in Sources */,
 				CF8C85862A0CA3C0006E9FF9 /* TeamTableViewCell.swift in Sources */,
+				CF5624C82A0DB5D000CBD395 /* AudioManagerViewModel.swift in Sources */,
 				CFFBD9C52A0C74A700CE76BC /* AppDelegate.swift in Sources */,
 				CFFBDA092A0C99B600CE76BC /* Team.swift in Sources */,
 				CFFBD9C72A0C74A700CE76BC /* SceneDelegate.swift in Sources */,
